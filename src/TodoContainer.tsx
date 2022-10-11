@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import dayjs from 'dayjs';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
+import LinearGradient from 'react-native-linear-gradient';
 
 import TodoItem from './TodoItem';
 import {Todo} from './types';
@@ -107,51 +108,53 @@ const TodoContainer = () => {
       </View>
 
       {/* list */}
-      <View style={styles().listContainer}>
-        <Text style={{fontWeight: '700', fontSize: 18, color: 'white'}}>
-          All Tasks
-        </Text>
+      <LinearGradient colors={['#53b6ff', '#6f0bff']} style={{flex: 1}}>
+        <View style={styles().listContainer}>
+          <Text style={{fontWeight: '700', fontSize: 18, color: 'white'}}>
+            All Tasks
+          </Text>
 
-        <View style={{height: 10}} />
+          <View style={{height: 10}} />
 
-        <FlatList
-          data={filteredTodos}
-          ItemSeparatorComponent={() => <View style={{height: 10}} />}
-          renderItem={({item: todo}) => {
-            return (
-              <TodoItem
-                todo={todo}
-                onToggleTodo={onToggleTodo}
-                onDeleteTodo={onDeleteTodo}
-              />
-            );
-          }}
-        />
-      </View>
+          <FlatList
+            data={filteredTodos}
+            ItemSeparatorComponent={() => <View style={{height: 10}} />}
+            renderItem={({item: todo}) => {
+              return (
+                <TodoItem
+                  todo={todo}
+                  onToggleTodo={onToggleTodo}
+                  onDeleteTodo={onDeleteTodo}
+                />
+              );
+            }}
+          />
+        </View>
 
-      {/* input */}
-      <View style={styles().inputContainer}>
-        <TextInput
-          style={{
-            backgroundColor: '#fff',
-            height: 50,
-            flex: 1,
-            borderRadius: 10,
-            paddingHorizontal: 15,
-            fontSize: 18,
-            color: '#06d6a0',
-          }}
-          onChangeText={setTask}
-          value={task}
-        />
-        <View style={{width: 10}} />
-        <TouchableOpacity
-          onPress={onAddTodo}
-          disabled={task.trim() === ''}
-          style={{opacity: task.trim() === '' ? 0.5 : 1}}>
-          <Icon name="pluscircle" size={40} color={'white'} />
-        </TouchableOpacity>
-      </View>
+        {/* input */}
+        <View style={styles().inputContainer}>
+          <TextInput
+            style={{
+              backgroundColor: '#fff',
+              height: 45,
+              flex: 1,
+              borderRadius: 10,
+              paddingHorizontal: 15,
+              fontSize: 18,
+              color: '#6f0bff',
+            }}
+            onChangeText={setTask}
+            value={task}
+          />
+          <View style={{width: 10}} />
+          <TouchableOpacity
+            onPress={onAddTodo}
+            disabled={task.trim() === ''}
+            style={{opacity: task.trim() === '' ? 0.5 : 1}}>
+            <Icon name="pluscircle" size={40} color={'#ff0b62'} />
+          </TouchableOpacity>
+        </View>
+      </LinearGradient>
     </View>
   );
 };
@@ -171,14 +174,12 @@ const styles = () =>
       flex: 1,
       paddingHorizontal: 20,
       paddingVertical: 10,
-      backgroundColor: '#06d6a0',
     },
     inputContainer: {
       paddingHorizontal: 20,
       paddingBottom: 10,
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: '#06d6a0',
     },
     input: {
       borderWidth: 1,
