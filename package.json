@@ -1,5 +1,5 @@
 {
-  "name": "MyApp",
+  "name": "todo-app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,16 +10,15 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@types/uuid": "^8.3.4",
     "dayjs": "^1.11.5",
-    "fuse.js": "^6.6.2",
     "react": "18.1.0",
     "react-native": "0.70.1",
-    "react-native-fab": "^1.0.18",
+    "react-native-get-random-values": "^1.8.0",
     "react-native-vector-icons": "^9.2.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/uuid": "^8.3.4",
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",

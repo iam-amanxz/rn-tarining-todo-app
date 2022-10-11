@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import dayjs from 'dayjs';
-import Fuse from 'fuse.js';
+import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 
 import TodoItem from './TodoItem';
@@ -27,20 +27,19 @@ const TodoContainer = () => {
   const [todos, setTodos] = useState<Todo[]>(initialState);
   const [task, setTask] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const fuse = new Fuse(todos, {
-    keys: ['task'],
-    includeScore: true,
-    isCaseSensitive: false,
-  });
+
+  const filteredTodos = todos.filter(todo =>
+    todo.task.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
   const completedTodoCount = todos.filter(todo => todo.completed).length;
-  const filteredTodos = fuse.search(searchTerm);
 
   const onAddTodo = () => {
     if (task.trim() === '') return;
 
+    const id = uuidv4();
     const newTodo: Todo = {
-      id: uuidv4(),
-      task,
+      id: id,
+      task: task,
       completed: false,
     };
 
@@ -121,7 +120,7 @@ const TodoContainer = () => {
           renderItem={({item: todo}) => {
             return (
               <TodoItem
-                todo={todo.item}
+                todo={todo}
                 onToggleTodo={onToggleTodo}
                 onDeleteTodo={onDeleteTodo}
               />
